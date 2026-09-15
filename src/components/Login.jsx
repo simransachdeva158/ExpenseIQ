@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "./Login.css";
 
-function Login({ onLogin }) {
+function Login({ onLogin, onBack }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [remember, setRemember] = useState(false);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -14,17 +15,38 @@ function Login({ onLogin }) {
     }
 
     localStorage.setItem("userEmail", email);
+
+    if (remember) {
+      localStorage.setItem("rememberMe", "true");
+    } else {
+      localStorage.removeItem("rememberMe");
+    }
+
     onLogin();
   };
 
   return (
     <div className="login-page">
       <div className="login-card">
+
+        <button className="back-btn" onClick={onBack}>
+          ← Back
+        </button>
+
+        <div className="login-logo">
+          <div>₹</div>
+          <span>ExpenseIQ</span>
+        </div>
+
         <h1>Welcome Back</h1>
-        <p>Login to continue to ExpenseIQ</p>
+
+        <p className="login-subtitle">
+          Login to continue to ExpenseIQ
+        </p>
 
         <form onSubmit={handleLogin}>
           <label>Email</label>
+
           <input
             type="email"
             placeholder="Enter your email"
@@ -33,6 +55,7 @@ function Login({ onLogin }) {
           />
 
           <label>Password</label>
+
           <input
             type="password"
             placeholder="Enter your password"
@@ -40,8 +63,33 @@ function Login({ onLogin }) {
             onChange={(e) => setPassword(e.target.value)}
           />
 
-          <button type="submit">Login</button>
+          <div className="login-options">
+            <label className="remember">
+              <input
+                type="checkbox"
+                checked={remember}
+                onChange={(e) => setRemember(e.target.checked)}
+              />
+              Remember me
+            </label>
+
+            <button type="button">
+              Forgot password?
+            </button>
+          </div>
+
+          <button className="signin-btn" type="submit">
+            Sign In
+          </button>
         </form>
+
+        <p className="signup-text">
+          Don't have an account?{" "}
+          <button type="button">
+            Sign Up
+          </button>
+        </p>
+
       </div>
     </div>
   );
