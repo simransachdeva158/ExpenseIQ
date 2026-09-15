@@ -1,52 +1,25 @@
-function Navbar({ page, setPage }) {
+import { useState } from "react";
+
+function Navbar() {
+  const [userEmail, setUserEmail] = useState(
+    localStorage.getItem("userEmail") || "Guest"
+  );
+
+  const handleLogout = () => {
+    localStorage.removeItem("userEmail");
+    setUserEmail("Guest");
+  };
+
   return (
     <nav className="navbar">
-
-      <div className="brand">
-        <div className="brand-icon">₹</div>
-
-        <div>
-          <h2>ExpenseIQ</h2>
-          <span>Smart Money Tracker</span>
-        </div>
+      <div className="navbar-left">
+        <h2>ExpenseIQ</h2>
       </div>
 
-      <div className="nav-links">
-
-        <button
-          className={page === "dashboard" ? "nav-link active" : "nav-link"}
-          onClick={() => setPage("dashboard")}
-        >
-          Dashboard
-        </button>
-
-        <button
-          className={page === "transactions" ? "nav-link active" : "nav-link"}
-          onClick={() => setPage("transactions")}
-        >
-          Transactions
-        </button>
-
-        <button
-          className={page === "analytics" ? "nav-link active" : "nav-link"}
-          onClick={() => setPage("analytics")}
-        >
-          Analytics
-        </button>
-
-        <button
-          className={page === "budget" ? "nav-link active" : "nav-link"}
-          onClick={() => setPage("budget")}
-        >
-          Budgets
-        </button>
-
+      <div className="navbar-right">
+        <span>{userEmail}</span>
+        <button onClick={handleLogout}>Logout</button>
       </div>
-
-      <div className="profile">
-        SS
-      </div>
-
     </nav>
   );
 }
