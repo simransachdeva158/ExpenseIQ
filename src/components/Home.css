@@ -1,0 +1,267 @@
+.home-page {
+  min-height: 100vh;
+  background: #f5f7fc;
+  color: #111638;
+}
+
+.home-navbar {
+  height: 56px;
+  background: #111638;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+  box-sizing: border-box;
+}
+
+.home-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.home-logo-icon {
+  width: 27px;
+  height: 27px;
+  border-radius: 7px;
+  background: #f5a623;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111638;
+  font-weight: 800;
+}
+
+.home-login-btn {
+  border: none;
+  background: transparent;
+  color: #d9def2;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.home-hero {
+  max-width: 1100px;
+  min-height: calc(100vh - 56px);
+  margin: auto;
+  padding: 80px 50px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 60px;
+  box-sizing: border-box;
+}
+
+.home-content {
+  max-width: 570px;
+}
+
+.home-badge {
+  display: inline-block;
+  padding: 7px 11px;
+  border-radius: 20px;
+  background: #fff1d8;
+  color: #d88b17;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.home-content h1 {
+  margin: 18px 0 15px;
+  font-size: 48px;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+
+.home-content h1 span {
+  color: #f0a027;
+}
+
+.home-content p {
+  max-width: 510px;
+  margin: 0;
+  color: #71809f;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.get-started-btn {
+  margin-top: 27px;
+  padding: 13px 21px;
+  border: none;
+  border-radius: 8px;
+  background: #242e73;
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(36, 46, 115, 0.2);
+}
+
+.get-started-btn span {
+  margin-left: 12px;
+  font-size: 15px;
+}
+
+.get-started-btn:hover {
+  background: #1b245f;
+}
+
+.home-features {
+  display: flex;
+  gap: 22px;
+  margin-top: 28px;
+  color: #657391;
+  font-size: 10px;
+}
+
+.home-features div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.home-features span {
+  color: #36a58f;
+  font-weight: 800;
+}
+
+.home-preview {
+  display: flex;
+  justify-content: center;
+}
+
+.preview-card {
+  width: 340px;
+  padding: 25px;
+  border-radius: 18px;
+  background: #111638;
+  color: white;
+  box-shadow: 0 25px 55px rgba(17, 22, 56, 0.22);
+  box-sizing: border-box;
+  transform: rotate(2deg);
+}
+
+.preview-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.preview-top small,
+.preview-stats small {
+  color: #9ca8ca;
+  font-size: 9px;
+}
+
+.preview-top h2 {
+  margin: 5px 0 0;
+  font-size: 27px;
+}
+
+.preview-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: #f5a623;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #111638;
+  font-weight: 800;
+}
+
+.preview-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 27px;
+}
+
+.preview-stats div {
+  padding: 13px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.preview-stats strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.preview-chart {
+  height: 100px;
+  margin-top: 25px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-line {
+  position: absolute;
+  height: 2px;
+  width: 110%;
+  left: -5%;
+  transform: rotate(-8deg);
+  background: #f5a623;
+}
+
+.line1 {
+  top: 70px;
+}
+
+.line2 {
+  top: 52px;
+  transform: rotate(7deg);
+}
+
+.line3 {
+  top: 35px;
+  transform: rotate(-10deg);
+}
+
+.line4 {
+  top: 18px;
+  transform: rotate(5deg);
+}
+
+.preview-label {
+  margin: 12px 0 0;
+  color: #9ca8ca;
+  font-size: 9px;
+}
+
+@media (max-width: 800px) {
+  .home-hero {
+    grid-template-columns: 1fr;
+    padding: 55px 25px;
+    text-align: center;
+  }
+
+  .home-content {
+    margin: auto;
+  }
+
+  .home-content p {
+    margin: auto;
+  }
+
+  .home-features {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .home-preview {
+    margin-top: 15px;
+  }
+
+  .home-content h1 {
+    font-size: 38px;
+  }
+}
