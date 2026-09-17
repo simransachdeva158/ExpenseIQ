@@ -6,6 +6,8 @@ const budgets = [
   { name: "Transport", limit: 5000 },
   { name: "Shopping", limit: 10000 },
   { name: "Bills & Utilities", limit: 8000 },
+  { name: "Entertainment", limit: 5000 },
+  { name: "Other", limit: 5000 },
 ];
 
 const categories = [
@@ -108,24 +110,20 @@ function Transactions({ transactions, setTransactions }) {
     );
   };
 
-  const formatDate = (dateString) => {
-    const dateObj = new Date(dateString);
-
-    return dateObj.toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-    });
-  };
-
   return (
     <div className="transactions-page">
 
       <div className="transactions-heading">
         <div>
-          <span className="section-label">04 · TRANSACTIONS</span>
+          <span className="section-label">
+            04 · TRANSACTIONS
+          </span>
+
           <h1>Smart Transaction Entry</h1>
+
           <p>
-            Add, validate and track your transactions in real time.
+            Add, validate and track your transactions
+            in real time.
           </p>
         </div>
       </div>
@@ -135,8 +133,13 @@ function Transactions({ transactions, setTransactions }) {
         <div className="entry-card">
 
           <div className="type-switch">
+
             <button
-              className={type === "Expense" ? "active" : ""}
+              className={
+                type === "Expense"
+                  ? "active"
+                  : ""
+              }
               onClick={() => setType("Expense")}
               type="button"
             >
@@ -154,6 +157,7 @@ function Transactions({ transactions, setTransactions }) {
             >
               + Income
             </button>
+
           </div>
 
           <form onSubmit={handleSubmit}>
@@ -161,6 +165,7 @@ function Transactions({ transactions, setTransactions }) {
             <div className="form-grid">
 
               <div className="form-group">
+
                 <label>AMOUNT (₹)</label>
 
                 <input
@@ -179,9 +184,11 @@ function Transactions({ transactions, setTransactions }) {
                       Amount must be greater than 0
                     </span>
                   )}
+
               </div>
 
               <div className="form-group">
+
                 <label>DATE</label>
 
                 <input
@@ -191,6 +198,7 @@ function Transactions({ transactions, setTransactions }) {
                     setDate(e.target.value)
                   }
                 />
+
               </div>
 
             </div>
@@ -211,19 +219,19 @@ function Transactions({ transactions, setTransactions }) {
                           ? "category-btn selected"
                           : "category-btn"
                       }
-                      onClick={() =>
-                        setCategory(item)
-                      }
+                      onClick={() => setCategory(item)}
                     >
                       {item}
                     </button>
                   ))}
 
                 </div>
+
               </div>
             )}
 
             <div className="form-group">
+
               <label>NOTE</label>
 
               <input
@@ -234,6 +242,7 @@ function Transactions({ transactions, setTransactions }) {
                   setNote(e.target.value)
                 }
               />
+
             </div>
 
             <div className="form-actions">
@@ -259,6 +268,7 @@ function Transactions({ transactions, setTransactions }) {
             </div>
 
           </form>
+
         </div>
 
         <div className="preview-column">
@@ -318,7 +328,7 @@ function Transactions({ transactions, setTransactions }) {
               <span>LIVE</span>
             </div>
 
-            {budgets.slice(0, 3).map((budget) => {
+            {budgets.map((budget) => {
 
               const spent = categorySpent(
                 budget.name
@@ -336,12 +346,21 @@ function Transactions({ transactions, setTransactions }) {
                 >
 
                   <div className="budget-top">
-                    <span>{budget.name}</span>
 
                     <span>
-                      ₹{spent.toLocaleString("en-IN")} /
-                      ₹{budget.limit.toLocaleString("en-IN")}
+                      {budget.name}
                     </span>
+
+                    <span>
+                      ₹
+                      {spent.toLocaleString("en-IN")}
+                      {" / "}
+                      ₹
+                      {budget.limit.toLocaleString(
+                        "en-IN"
+                      )}
+                    </span>
+
                   </div>
 
                   <div className="progress-track">
@@ -368,6 +387,7 @@ function Transactions({ transactions, setTransactions }) {
           </div>
 
         </div>
+
       </section>
 
       <section className="all-transactions-section">
@@ -375,11 +395,13 @@ function Transactions({ transactions, setTransactions }) {
         <div className="section-top">
 
           <div>
+
             <span className="section-label">
               05 · ACTIVITY
             </span>
 
             <h2>All Transactions</h2>
+
           </div>
 
           <button className="export-btn">
@@ -405,9 +427,7 @@ function Transactions({ transactions, setTransactions }) {
                     ? "filter-btn active-filter"
                     : "filter-btn"
                 }
-                onClick={() =>
-                  setFilter(item)
-                }
+                onClick={() => setFilter(item)}
               >
                 {item}
               </button>
@@ -432,24 +452,30 @@ function Transactions({ transactions, setTransactions }) {
           <div className="transaction-list-card">
 
             <div className="table-header">
+
               <span>TRANSACTION</span>
               <span>CATEGORY</span>
               <span>DATE</span>
               <span>AMOUNT</span>
               <span></span>
+
             </div>
 
             {filteredTransactions.length === 0 ? (
 
               <div className="empty-state">
 
-                <div className="empty-icon">₹</div>
+                <div className="empty-icon">
+                  ₹
+                </div>
 
-                <h3>No transactions found</h3>
+                <h3>
+                  No transactions found
+                </h3>
 
                 <p>
-                  Try changing your filters or add a new
-                  transaction.
+                  Try changing your filters or add
+                  a new transaction.
                 </p>
 
               </div>
@@ -492,9 +518,12 @@ function Transactions({ transactions, setTransactions }) {
                     </div>
 
                     <span className="date-text">
-                      {formatDate(
+                      {new Date(
                         transaction.date
-                      )}
+                      ).toLocaleDateString("en-IN", {
+                        day: "2-digit",
+                        month: "short",
+                      })}
                     </span>
 
                     <strong
@@ -525,8 +554,10 @@ function Transactions({ transactions, setTransactions }) {
                     </button>
 
                   </div>
+
                 )
               )
+
             )}
 
           </div>
@@ -561,8 +592,13 @@ function Transactions({ transactions, setTransactions }) {
                       </strong>
 
                       <span>
-                        ₹{spent.toLocaleString("en-IN")} /
-                        ₹{budget.limit.toLocaleString("en-IN")}
+                        ₹
+                        {spent.toLocaleString("en-IN")}
+                        {" / "}
+                        ₹
+                        {budget.limit.toLocaleString(
+                          "en-IN"
+                        )}
                       </span>
 
                     </div>
