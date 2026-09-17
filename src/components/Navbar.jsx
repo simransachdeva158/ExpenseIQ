@@ -1,73 +1,53 @@
-import { useState } from "react";
-
-function Navbar({ setPage }) {
-  const [userEmail] = useState(
-    localStorage.getItem("userEmail") || "Guest"
-  );
-
-  const handleLogout = () => {
-    localStorage.removeItem("userEmail");
-    window.location.reload();
-  };
-
+function Navbar({ page, setPage }) {
   return (
-    <aside className="sidebar">
-      <div className="sidebar-logo">
-        <div className="logo-icon">₹</div>
-        <span>ExpenseIQ</span>
+    <nav className="navbar">
+
+      <div className="brand">
+        <div className="brand-icon">₹</div>
+
+        <div>
+          <h2>ExpenseIQ</h2>
+          <span>Smart Money Tracker</span>
+        </div>
       </div>
 
-      <div className="sidebar-menu">
+      <div className="nav-links">
+
         <button
-          className="sidebar-item"
+          className={page === "dashboard" ? "nav-link active" : "nav-link"}
           onClick={() => setPage("dashboard")}
         >
-          <span>📊</span>
           Dashboard
         </button>
 
         <button
-          className="sidebar-item"
+          className={page === "transactions" ? "nav-link active" : "nav-link"}
           onClick={() => setPage("transactions")}
         >
-          <span>💳</span>
           Transactions
         </button>
 
         <button
-          className="sidebar-item"
+          className={page === "analytics" ? "nav-link active" : "nav-link"}
           onClick={() => setPage("analytics")}
         >
-          <span>📈</span>
           Analytics
         </button>
 
         <button
-          className="sidebar-item"
-          onClick={() => setPage("budgets")}
+          className={page === "budget" ? "nav-link active" : "nav-link"}
+          onClick={() => setPage("budget")}
         >
-          <span>💰</span>
           Budgets
         </button>
+
       </div>
 
-      <div className="sidebar-bottom">
-        <div className="user-profile">
-          <div className="user-avatar">
-            {userEmail.charAt(0).toUpperCase()}
-          </div>
-
-          <div className="user-info">
-            <span className="user-label">Logged in as</span>
-            <span className="user-email">{userEmail}</span>
-          </div>
-        </div>
-
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
+      <div className="profile">
+        SS
       </div>
-    </aside>
+
+    </nav>
   );
 }
 
