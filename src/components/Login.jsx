@@ -14,6 +14,20 @@ function Login({ onLogin, onBack }) {
       return;
     }
 
+    const users = JSON.parse(
+      localStorage.getItem("expenseIQ_users") || "{}"
+    );
+
+    if (!users[email]) {
+      alert("Account does not exist. Please sign up first.");
+      return;
+    }
+
+    if (users[email].password !== password) {
+      alert("Incorrect password");
+      return;
+    }
+
     localStorage.setItem("userEmail", email);
 
     if (remember) {
@@ -23,6 +37,33 @@ function Login({ onLogin, onBack }) {
     }
 
     onLogin();
+  };
+
+  const handleSignup = () => {
+    if (!email || !password) {
+      alert("Please enter email and password");
+      return;
+    }
+
+    const users = JSON.parse(
+      localStorage.getItem("expenseIQ_users") || "{}"
+    );
+
+    if (users[email]) {
+      alert("Account already exists. Please sign in.");
+      return;
+    }
+
+    users[email] = {
+      password: password
+    };
+
+    localStorage.setItem(
+      "expenseIQ_users",
+      JSON.stringify(users)
+    );
+
+    alert("Account created successfully. Please sign in.");
   };
 
   return (
@@ -64,11 +105,14 @@ function Login({ onLogin, onBack }) {
           />
 
           <div className="login-options">
+
             <label className="remember">
               <input
                 type="checkbox"
                 checked={remember}
-                onChange={(e) => setRemember(e.target.checked)}
+                onChange={(e) =>
+                  setRemember(e.target.checked)
+                }
               />
               Remember me
             </label>
@@ -76,16 +120,25 @@ function Login({ onLogin, onBack }) {
             <button type="button">
               Forgot password?
             </button>
+
           </div>
 
-          <button className="signin-btn" type="submit">
+          <button
+            className="signin-btn"
+            type="submit"
+          >
             Sign In
           </button>
+
         </form>
 
         <p className="signup-text">
           Don't have an account?{" "}
-          <button type="button">
+
+          <button
+            type="button"
+            onClick={handleSignup}
+          >
             Sign Up
           </button>
         </p>

@@ -1,4 +1,7 @@
 function Navbar({ page, setPage }) {
+  const email = localStorage.getItem("userEmail") || "";
+  const initial = email.charAt(0).toUpperCase();
+
   return (
     <nav className="navbar">
 
@@ -44,7 +47,7 @@ function Navbar({ page, setPage }) {
       </div>
 
       <div className="profile">
-        SS
+        {initial}
       </div>
 
     </nav>

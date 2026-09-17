@@ -1,65 +1,6 @@
 import React, { useMemo, useState } from "react";
 import "./Transactions.css";
 
-const initialTransactions = [
-  {
-    id: 1,
-    title: "Swiggy Order",
-    category: "Food & Dining",
-    date: "2026-09-13",
-    amount: 460,
-    type: "Expense",
-  },
-  {
-    id: 2,
-    title: "Freelance Payment",
-    category: "Income",
-    date: "2026-09-12",
-    amount: 12000,
-    type: "Income",
-  },
-  {
-    id: 3,
-    title: "Ola Cab",
-    category: "Transport",
-    date: "2026-09-12",
-    amount: 220,
-    type: "Expense",
-  },
-  {
-    id: 4,
-    title: "Electricity Bill",
-    category: "Bills & Utilities",
-    date: "2026-09-10",
-    amount: 1840,
-    type: "Expense",
-  },
-  {
-    id: 5,
-    title: "Uber Rides",
-    category: "Transport",
-    date: "2026-09-09",
-    amount: 980,
-    type: "Expense",
-  },
-  {
-    id: 6,
-    title: "Grocery Store",
-    category: "Food & Dining",
-    date: "2026-09-07",
-    amount: 2340,
-    type: "Expense",
-  },
-  {
-    id: 7,
-    title: "Salary Credit",
-    category: "Income",
-    date: "2026-09-01",
-    amount: 56000,
-    type: "Income",
-  },
-];
-
 const budgets = [
   { name: "Food & Dining", limit: 9000 },
   { name: "Transport", limit: 5000 },
@@ -76,9 +17,7 @@ const categories = [
   "Other",
 ];
 
-function Transactions() {
-  const [transactions, setTransactions] = useState(initialTransactions);
-
+function Transactions({ transactions, setTransactions }) {
   const [type, setType] = useState("Expense");
   const [amount, setAmount] = useState("");
   const [date, setDate] = useState("2026-09-15");
@@ -163,12 +102,15 @@ function Transactions() {
 
   const deleteTransaction = (id) => {
     setTransactions(
-      transactions.filter((transaction) => transaction.id !== id)
+      transactions.filter(
+        (transaction) => transaction.id !== id
+      )
     );
   };
 
   const formatDate = (dateString) => {
     const dateObj = new Date(dateString);
+
     return dateObj.toLocaleDateString("en-IN", {
       day: "2-digit",
       month: "short",
@@ -202,7 +144,11 @@ function Transactions() {
             </button>
 
             <button
-              className={type === "Income" ? "active income-active" : ""}
+              className={
+                type === "Income"
+                  ? "active income-active"
+                  : ""
+              }
               onClick={() => setType("Income")}
               type="button"
             >
@@ -216,27 +162,34 @@ function Transactions() {
 
               <div className="form-group">
                 <label>AMOUNT (₹)</label>
+
                 <input
                   type="number"
                   min="0"
                   placeholder="0"
                   value={amount}
-                  onChange={(e) => setAmount(e.target.value)}
+                  onChange={(e) =>
+                    setAmount(e.target.value)
+                  }
                 />
 
-                {amount !== "" && Number(amount) <= 0 && (
-                  <span className="error-text">
-                    Amount must be greater than 0
-                  </span>
-                )}
+                {amount !== "" &&
+                  Number(amount) <= 0 && (
+                    <span className="error-text">
+                      Amount must be greater than 0
+                    </span>
+                  )}
               </div>
 
               <div className="form-group">
                 <label>DATE</label>
+
                 <input
                   type="date"
                   value={date}
-                  onChange={(e) => setDate(e.target.value)}
+                  onChange={(e) =>
+                    setDate(e.target.value)
+                  }
                 />
               </div>
 
@@ -244,9 +197,11 @@ function Transactions() {
 
             {type === "Expense" && (
               <div className="form-group category-group">
+
                 <label>CATEGORY</label>
 
                 <div className="category-options">
+
                   {categories.map((item) => (
                     <button
                       type="button"
@@ -256,26 +211,33 @@ function Transactions() {
                           ? "category-btn selected"
                           : "category-btn"
                       }
-                      onClick={() => setCategory(item)}
+                      onClick={() =>
+                        setCategory(item)
+                      }
                     >
                       {item}
                     </button>
                   ))}
+
                 </div>
               </div>
             )}
 
             <div className="form-group">
               <label>NOTE</label>
+
               <input
                 type="text"
                 placeholder="Add a short note (optional)"
                 value={note}
-                onChange={(e) => setNote(e.target.value)}
+                onChange={(e) =>
+                  setNote(e.target.value)
+                }
               />
             </div>
 
             <div className="form-actions">
+
               <button
                 type="button"
                 className="cancel-btn"
@@ -287,9 +249,13 @@ function Transactions() {
                 Cancel
               </button>
 
-              <button type="submit" className="save-btn">
+              <button
+                type="submit"
+                className="save-btn"
+              >
                 Save Transaction
               </button>
+
             </div>
 
           </form>
@@ -299,7 +265,9 @@ function Transactions() {
 
           <div className="live-preview">
 
-            <span className="preview-label">LIVE PREVIEW</span>
+            <span className="preview-label">
+              LIVE PREVIEW
+            </span>
 
             <h2>
               {type === "Expense" ? "−" : "+"} ₹
@@ -314,6 +282,7 @@ function Transactions() {
 
             <div className="preview-row">
               <span>Current Balance</span>
+
               <strong>
                 ₹{balance.toLocaleString("en-IN")}
               </strong>
@@ -321,15 +290,22 @@ function Transactions() {
 
             <div className="preview-row">
               <span>Category</span>
+
               <strong>
-                {type === "Income" ? "Income" : category}
+                {type === "Income"
+                  ? "Income"
+                  : category}
               </strong>
             </div>
 
             <div className="preview-row">
               <span>This Category</span>
+
               <strong>
-                ₹{currentCategorySpent.toLocaleString("en-IN")}
+                ₹
+                {currentCategorySpent.toLocaleString(
+                  "en-IN"
+                )}
               </strong>
             </div>
 
@@ -343,28 +319,40 @@ function Transactions() {
             </div>
 
             {budgets.slice(0, 3).map((budget) => {
-              const spent = categorySpent(budget.name);
+
+              const spent = categorySpent(
+                budget.name
+              );
+
               const percentage = Math.min(
                 (spent / budget.limit) * 100,
                 100
               );
 
               return (
-                <div className="budget-item" key={budget.name}>
+                <div
+                  className="budget-item"
+                  key={budget.name}
+                >
 
                   <div className="budget-top">
                     <span>{budget.name}</span>
+
                     <span>
-                      ₹{spent.toLocaleString("en-IN")} / ₹
-                      {budget.limit.toLocaleString("en-IN")}
+                      ₹{spent.toLocaleString("en-IN")} /
+                      ₹{budget.limit.toLocaleString("en-IN")}
                     </span>
                   </div>
 
                   <div className="progress-track">
+
                     <div
                       className="progress-fill"
-                      style={{ width: `${percentage}%` }}
+                      style={{
+                        width: `${percentage}%`,
+                      }}
                     />
+
                   </div>
 
                   {spent > budget.limit && (
@@ -380,7 +368,6 @@ function Transactions() {
           </div>
 
         </div>
-
       </section>
 
       <section className="all-transactions-section">
@@ -388,7 +375,10 @@ function Transactions() {
         <div className="section-top">
 
           <div>
-            <span className="section-label">05 · ACTIVITY</span>
+            <span className="section-label">
+              05 · ACTIVITY
+            </span>
+
             <h2>All Transactions</h2>
           </div>
 
@@ -402,21 +392,26 @@ function Transactions() {
 
           <div className="filter-buttons">
 
-            {["All", "Income", "Expense", "This Month"].map(
-              (item) => (
-                <button
-                  key={item}
-                  className={
-                    filter === item
-                      ? "filter-btn active-filter"
-                      : "filter-btn"
-                  }
-                  onClick={() => setFilter(item)}
-                >
-                  {item}
-                </button>
-              )
-            )}
+            {[
+              "All",
+              "Income",
+              "Expense",
+              "This Month",
+            ].map((item) => (
+              <button
+                key={item}
+                className={
+                  filter === item
+                    ? "filter-btn active-filter"
+                    : "filter-btn"
+                }
+                onClick={() =>
+                  setFilter(item)
+                }
+              >
+                {item}
+              </button>
+            ))}
 
           </div>
 
@@ -425,7 +420,9 @@ function Transactions() {
             type="text"
             placeholder="Search transactions..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) =>
+              setSearch(e.target.value)
+            }
           />
 
         </div>
@@ -443,66 +440,93 @@ function Transactions() {
             </div>
 
             {filteredTransactions.length === 0 ? (
+
               <div className="empty-state">
+
                 <div className="empty-icon">₹</div>
+
                 <h3>No transactions found</h3>
+
                 <p>
-                  Try changing your filters or add a new transaction.
+                  Try changing your filters or add a new
+                  transaction.
                 </p>
+
               </div>
+
             ) : (
-              filteredTransactions.map((transaction) => (
-                <div
-                  className="transaction-row"
-                  key={transaction.id}
-                >
 
-                  <div className="transaction-name">
-                    <strong>{transaction.title}</strong>
-                    <span>
-                      {transaction.type === "Income"
-                        ? "Income received"
-                        : "Expense recorded"}
+              filteredTransactions.map(
+                (transaction) => (
+
+                  <div
+                    className="transaction-row"
+                    key={transaction.id}
+                  >
+
+                    <div className="transaction-name">
+
+                      <strong>
+                        {transaction.title}
+                      </strong>
+
+                      <span>
+                        {transaction.type === "Income"
+                          ? "Income received"
+                          : "Expense recorded"}
+                      </span>
+
+                    </div>
+
+                    <div>
+
+                      <span
+                        className={`category-pill ${transaction.category
+                          .toLowerCase()
+                          .replaceAll(" ", "-")
+                          .replaceAll("&", "")}`}
+                      >
+                        {transaction.category}
+                      </span>
+
+                    </div>
+
+                    <span className="date-text">
+                      {formatDate(
+                        transaction.date
+                      )}
                     </span>
-                  </div>
 
-                  <div>
-                    <span
-                      className={`category-pill ${transaction.category
-                        .toLowerCase()
-                        .replaceAll(" ", "-")
-                        .replaceAll("&", "")}`}
+                    <strong
+                      className={
+                        transaction.type === "Income"
+                          ? "amount income"
+                          : "amount expense"
+                      }
                     >
-                      {transaction.category}
-                    </span>
+                      {transaction.type === "Income"
+                        ? "+"
+                        : "−"}
+                      ₹
+                      {transaction.amount.toLocaleString(
+                        "en-IN"
+                      )}
+                    </strong>
+
+                    <button
+                      className="delete-btn"
+                      onClick={() =>
+                        deleteTransaction(
+                          transaction.id
+                        )
+                      }
+                    >
+                      ×
+                    </button>
+
                   </div>
-
-                  <span className="date-text">
-                    {formatDate(transaction.date)}
-                  </span>
-
-                  <strong
-                    className={
-                      transaction.type === "Income"
-                        ? "amount income"
-                        : "amount expense"
-                    }
-                  >
-                    {transaction.type === "Income" ? "+" : "−"}₹
-                    {transaction.amount.toLocaleString("en-IN")}
-                  </strong>
-
-                  <button
-                    className="delete-btn"
-                    onClick={() =>
-                      deleteTransaction(transaction.id)
-                    }
-                  >
-                    ×
-                  </button>
-
-                </div>
-              ))
+                )
+              )
             )}
 
           </div>
@@ -514,33 +538,49 @@ function Transactions() {
               <h3>Category Budgets</h3>
 
               {budgets.map((budget) => {
-                const spent = categorySpent(budget.name);
+
+                const spent = categorySpent(
+                  budget.name
+                );
+
                 const percentage = Math.min(
                   (spent / budget.limit) * 100,
                   100
                 );
 
                 return (
-                  <div className="category-budget" key={budget.name}>
+                  <div
+                    className="category-budget"
+                    key={budget.name}
+                  >
 
                     <div className="category-budget-head">
-                      <strong>{budget.name}</strong>
+
+                      <strong>
+                        {budget.name}
+                      </strong>
+
                       <span>
-                        ₹{spent.toLocaleString("en-IN")} / ₹
-                        {budget.limit.toLocaleString("en-IN")}
+                        ₹{spent.toLocaleString("en-IN")} /
+                        ₹{budget.limit.toLocaleString("en-IN")}
                       </span>
+
                     </div>
 
                     <div className="budget-bar">
+
                       <div
                         style={{
                           width: `${percentage}%`,
                         }}
                       />
+
                     </div>
 
                     {spent > budget.limit && (
-                      <small>OVER BUDGET</small>
+                      <small>
+                        OVER BUDGET
+                      </small>
                     )}
 
                   </div>
@@ -554,8 +594,15 @@ function Transactions() {
               <h3>Filter Summary</h3>
 
               <p>
-                Showing <strong>{filteredTransactions.length}</strong>{" "}
-                of <strong>{transactions.length}</strong> transactions
+                Showing{" "}
+                <strong>
+                  {filteredTransactions.length}
+                </strong>{" "}
+                of{" "}
+                <strong>
+                  {transactions.length}
+                </strong>{" "}
+                transactions
               </p>
 
               <p>
@@ -568,7 +615,10 @@ function Transactions() {
 
               <p>
                 Date range:
-                <strong> 01–15 Sep 2026</strong>
+                <strong>
+                  {" "}
+                  01–15 Sep 2026
+                </strong>
               </p>
 
             </div>
