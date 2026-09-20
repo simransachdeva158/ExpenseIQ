@@ -34,7 +34,6 @@ button {
   cursor: pointer;
 }
 
-/* ================= NAVBAR ================= */
 
 .navbar {
   height: 74px;
@@ -130,7 +129,7 @@ button {
   font-weight: 800;
 }
 
-/* ================= MAIN ================= */
+
 
 .main-content {
   min-height: calc(100vh - 74px);
@@ -170,7 +169,6 @@ button {
   font-size: 12px;
 }
 
-/* ================= BUTTONS ================= */
 
 .primary-btn {
   border: none;
@@ -207,7 +205,6 @@ button {
   gap: 9px;
 }
 
-/* ================= SUMMARY ================= */
 
 .summary-grid {
   display: grid;
@@ -284,7 +281,6 @@ button {
   font-size: 8px;
 }
 
-/* ================= PANELS ================= */
 
 .panel {
   background: white;
@@ -320,7 +316,7 @@ button {
   font-size: 8px;
 }
 
-/* ================= DASHBOARD ================= */
+
 
 .charts-grid {
   display: grid;
@@ -445,7 +441,6 @@ button {
   color: var(--red);
 }
 
-/* ================= TRANSACTIONS ================= */
 
 .transaction-toolbar {
   background: white;
@@ -824,7 +819,7 @@ button {
   padding-top: 100px;
 }
 
-/* ================= BUDGET ================= */
+
 
 .budget-summary {
   display: grid;
@@ -962,7 +957,7 @@ button {
   font-size: 9px;
 }
 
-/* ================= EMPTY ================= */
+
 
 .empty-state {
   padding: 60px 20px;
@@ -992,7 +987,7 @@ button {
   margin-top: 5px;
 }
 
-/* ================= RESPONSIVE ================= */
+
 
 @media (max-width: 1100px) {
 
