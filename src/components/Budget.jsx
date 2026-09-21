@@ -209,14 +209,26 @@ function Budget({
   }
 
   function spent(category) {
+
+    const categoryMap = {
+      Food: "Food & Dining",
+      Transport: "Transport",
+      Shopping: "Shopping",
+      Bills: "Bills & Utilities"
+    };
+
+    const transactionCategory =
+      categoryMap[category] || category;
+
     return transactions
       .filter(
         item =>
           String(item.type).toLowerCase() === "expense" &&
-          item.category === category
+          item.category === transactionCategory
       )
       .reduce(
-        (sum, item) => sum + Number(item.amount || 0),
+        (sum, item) =>
+          sum + Number(item.amount || 0),
         0
       );
   }
@@ -302,7 +314,7 @@ function Budget({
               : 0;
 
           const over =
-            amount > limit && limit > 0;
+            limit > 0 && amount > limit;
 
           return (
             <div
